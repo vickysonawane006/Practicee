@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Friendship</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #fde2e4;
+            color: #5a3d5c;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        h1, h2, p {
+            font-weight: 600;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+        }
+        h1 { font-size: 2.8rem; color: #b03a63; }
+        h2 { font-size: 2rem; color: #8e3b46; }
+        p {
+            font-size: 1.2rem;
+            color: #6b3e53;
+            white-space: pre-line;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            display: none;
+            padding: 50px 20px;
+            min-height: 100vh;
+        }
+        .visible { display: block; animation: fadeIn 1.5s ease-in-out; }
+        
+        #lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #fbd5e4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #b03a63;
+            border-radius: 8px;
+            margin: 10px;
+        }
+        button {
+            background-color: #b03a63;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #8e3b46;
+            transform: scale(1.08);
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        .gallery .polaroid {
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .gallery .polaroid:hover { transform: scale(1.1); }
+        .gallery img { width: 220px; height: 220px; border-radius: 10px; }
+        
+        .panda-images {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .panda-images img { width: 120px; height: auto; }
+        
+        #hidden-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #5a3d5c;
+            background: #f8c8dc;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="background-music" autoplay loop>
+        <source src="blue.mpeg" type="audio/mpeg">
+        <source src="blue.mpeg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <div id="lock-screen">
+        <h1>Enter your fav day to unlock..!</h1>
+        <input type="password" id="password" placeholder="DD MMM">
+        <button onclick="unlockWebsite()">Unlock</button>
+        <button onclick="showHint()">Clue</button>
+        <p id="hint" style="display: none; font-size: 0.9rem; color: #b03a63;">Our Canvas Day..! (in DD/MM/YYYY format)</p>
+    </div>
+    <button onclick="document.getElementById('background-music').play()">Play Music</button>
+
+    
+    <audio id="bg-music" loop>
+        <source src="blue.mpeg"audio/mpeg">
+    </audio>
+    
+    <div id="welcome-section" class="section visible">
+        <h1>Heyyyy monkssssss, welcome..!</h1>
+        <p>From crazy adventures to deep talks, here’s a little tribute to the best friendship ever! 💖</p>
+        <button onclick="nextSection(1)">Let's Get Started</button>
+    </div>
+    
+    <div id="journey-section" class="section">
+        <h2>Our Friendship Journey ✨</h2>
+        <p>From our first meeting
+        to all the ups and downs,
+        misunderstandings, fights,
+        distance, and countless memories...
+        we are still together.
+        And that’s what matters the most! 💛</p>
+        <div class="panda-images">
+            <img src="Baby monkey.jpg" alt="Cute Panda 1">
+            <img src="2b815693-8b05-4893-abf7-deb605c4c90d.jpg" alt="Cute Panda 2">
+        </div>
+        <button onclick="nextSection(2)">Next</button>
+    </div>
+    
+    <div id="gallery-section" class="section">
+        <h2>Our Memories 📸</h2>
+        <div class="gallery">
+            <div class="polaroid"><img src="WhatsApp Image 2025-02-09 at 00.02.52 (1).jpeg" alt="Memory 1"></div>
+            <div class="polaroid"><img src="WhatsApp Image 2025-02-09 at 00.02.52.jpeg" alt="Memory 1"></div>
+            <div class="polaroid"><img src="WhatsApp Image 2025-02-09 at 00.31.41 (1).jpeg" alt="Memory 1"></div>
+        </div>
+        <button onclick="nextSection(3)">Next</button>
+    </div>
+    
+    <div id="songs-section" class="section">
+        <h2>Incase you're bored, heres Our Favorite Songs 🎶</h2>
+        <h3>Your Top 5😉</h3>
+        <ul>
+            <li><a href="#">Khwab</a></li>
+            <li><a href="#">Kahin to</a></li>
+            <li><a href="#">Raabta</a></li>
+            <li><a href="#">Madhubala</a></li>
+            <li><a href="#">Aaoge jab tum</a></li>
+        </ul>
+        <h3>My Top 5😉</h3>
+        <ul>
+            <li><a href="#">Tere hawale</a></li>
+            <li><a href="#">In dino</a></li>
+            <li><a href="#">Until i found you</a></li>
+            <li><a href="#">Darkhaast</a></li>
+            <li><a href="#">Blue by yung kai</a></li>
+        </ul>
+        <button onclick="nextSection(4)">Next</button>
+    </div>
+
+    <div id="message-section" class="section">
+        <h2>A Special Message for Future Sanchita 💌</h2>
+        <p>Click below to reveal your surprise!</p>
+        <button onclick="revealMessage()">Open Letter</button>
+        <div id="hidden-message">
+            <p>Hey monks,</p>
+            <p>Whenever things feel overwhelming, remember You are perfect, You are best and you can do anything.</p>
+            <p>You're amazing, and I’ll always be here for you. 💕</p>
+            <p>Hope u like it..!</p>
+        </div>
+    </div>
+
+    <script>
+
+        function unlockWebsite() {
+            const passwordInput = document.getElementById("password").value.trim();
+            if (passwordInput === "12/09/2023") {
+                document.getElementById("lock-screen").style.display = "none";
+                startMusic();
+            } else {
+                alert("Wrong password! Try again.");
+            }
+        }
+
+
+
+        function showHint() {
+            document.getElementById("hint").style.display = "block";
+        }
+
+        function nextSection(section) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("visible"));
+            document.querySelectorAll(".section")[section].classList.add("visible");
+        }
+        function unlockWebsite() {
+            const passwordInput = document.getElementById("password").value.trim();
+            if (passwordInput === "12/09/2023") {
+                document.getElementById("lock-screen").style.display = "none";
+            } else {
+                alert("Wrong password! Try again.");
+            }
+        }
+       
+
+    
+
+
+        function showHint() {
+            document.getElementById("hint").style.display = "block";
+        }
+        function nextSection(section) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("visible"));
+            document.querySelectorAll(".section")[section].classList.add("visible");
+        }
+        function revealMessage() {
+            document.getElementById("hidden-message").style.display = "block";
+        }
+    </script>
+</body>
+</html>
